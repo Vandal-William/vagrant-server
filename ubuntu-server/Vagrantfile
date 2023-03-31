@@ -1,0 +1,18 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.define "ubuntu" do |ubuntu|
+    ubuntu.vm.box = "bento/ubuntu-22.04"
+    ubuntu.vm.network "private_network",  ip: "10.0.0.10"
+    ubuntu.vm.hostname = "Ubuntu-22.04-Dev"
+    ubuntu.vm.provider "virtualbox" do |v|
+      v.name = "Ubuntu-22.04-Dev"
+      v.memory = 4096
+      v.cpus = 2
+    end
+    ubuntu.vm.provision :shell do |shell|
+      shell.path = "install.sh"
+    end
+  end
+end
